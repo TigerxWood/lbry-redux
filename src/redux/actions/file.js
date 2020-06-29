@@ -37,7 +37,7 @@ export function doFileGet(uri: string, saveFile: boolean = true, onSuccess?: Get
             data: { outpoint },
           });
 
-          dispatch(doToast({ message: `File timeout for uri ${uri}`, isError: true }));
+          dispatch(doToast({ message: __(`File timeout for uri ${uri}`), isError: true }));
         } else {
           if (streamInfo.purchase_receipt || streamInfo.content_fee) {
             dispatch({
@@ -71,7 +71,7 @@ export function doFileGet(uri: string, saveFile: boolean = true, onSuccess?: Get
 
         dispatch(
           doToast({
-            message: `Failed to view ${uri}, please try again. If this problem persists, visit https://lbry.com/faq/support for support.`,
+            message: __(`Failed to view ${uri}, please try again. If this problem persists, visit https://lbry.com/faq/support for support.`),
             isError: true,
           })
         );
@@ -101,7 +101,7 @@ export function doPurchaseUri(
     if (!saveFile && (alreadyDownloading || alreadyStreaming)) {
       dispatch({
         type: ACTIONS.PURCHASE_URI_FAILED,
-        data: { uri, error: `Already fetching uri: ${uri}` },
+        data: { uri, error: __(`Already fetching uri: ${uri}`) },
       });
 
       Promise.resolve();
@@ -112,7 +112,7 @@ export function doPurchaseUri(
     if (parseFloat(cost) > balance) {
       dispatch({
         type: ACTIONS.PURCHASE_URI_FAILED,
-        data: { uri, error: 'Insufficient credits' },
+        data: { uri, error: __('Insufficient credits') },
       });
 
       Promise.resolve();
